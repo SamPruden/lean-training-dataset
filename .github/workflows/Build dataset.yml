@@ -29,7 +29,7 @@ jobs:
           cd ./lean-training-data/
           export PATH=$PATH:~/.elan/bin
           lake exe cache get
-          timeout 60 ./scripts/training_data.sh
+          timeout 60 ./scripts/training_data.sh || [ $? -eq 124 ] && exit 0 || exit $?
           echo "uploading to hub"
           cd ..
           git clone https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test training_data_repo
