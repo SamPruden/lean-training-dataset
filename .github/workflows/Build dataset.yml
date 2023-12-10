@@ -29,5 +29,5 @@ jobs:
           echo "cache get"
           lake exe cache get
           echo "running script"
-          timeout 30 ./scripts/training_data.sh
+          timeout 30 ./scripts/training_data.sh Mathlib.Logic.Hydra
           echo "done"
