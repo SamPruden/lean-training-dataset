@@ -29,10 +29,12 @@ jobs:
           cd ./lean-training-data/
           export PATH=$PATH:~/.elan/bin
           lake exe cache get
-          timeout 30 ./scripts/training_data.sh || [ $? -eq 124 ] && exit 0 || exit $?
+          timeout 60 ./scripts/training_data.sh
+          echo "uploading to hub"
           cd ..
           git clone https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test training_data_repo
           mv ./lean-training-data/out/training_data ./training_data_repo/data
           git commit -a -m "Automatic data update"
           git push https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test main
+          echo "done upload"
           
