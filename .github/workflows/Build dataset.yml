@@ -26,4 +26,4 @@ jobs:
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
           cd ./lean-training-data/
           ~/.elan/bin/lake exe cache get
-          ~/.elan/bin/lake exe training_data Mathlib.Logic.Hydra
+          timeout 30 ./scripts/training_data.sh
