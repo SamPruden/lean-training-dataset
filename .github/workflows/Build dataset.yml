@@ -26,5 +26,8 @@ jobs:
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
           cd ./lean-training-data/
           export PATH=$PATH:~/.elan/bin
+          echo "cache get"
           lake exe cache get
+          echo "running script"
           timeout 30 ./scripts/training_data.sh
+          echo "done"
