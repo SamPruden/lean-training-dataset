@@ -35,11 +35,13 @@ jobs:
           echo "cloning"
           git clone https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test training_data_repo
           echo "moving"
-          mv ./lean-training-data/out/training_data ./training_data_repo/data
+          mv ./lean-training-data/out/training_data/ ./training_data_repo/data/
           git config user.name "Github Actions"
           git config user.email "GithubActions@example.com"
+          echo "add"
+          git add --all
           echo "commit"
-          git commit -a -m "Automatic data update"
+          git commit -m "Automatic data update"
           echo "push"
           git push https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test main
           echo "done upload"
