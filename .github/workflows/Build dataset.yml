@@ -36,6 +36,8 @@ jobs:
           git clone https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test training_data_repo
           echo "moving"
           mv ./lean-training-data/out/training_data ./training_data_repo/data
+          git config user.name "Github Actions"
+          git config user.email "GithubActions@example.com"
           echo "commit"
           git commit -a -m "Automatic data update"
           echo "push"
