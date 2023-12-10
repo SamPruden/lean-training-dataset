@@ -30,4 +30,5 @@ jobs:
           lake exe cache get
           echo "running script"
           timeout 30 ./scripts/training_data.sh Mathlib.Logic.Hydra
-          echo "done"
+          echo "manually try thingy see what go bang"
+          parallel -j32 ./scripts/training_data.sh -- ::: `cat .lake/packages/mathlib/Mathlib.lean | sed -e 's/import //'`
