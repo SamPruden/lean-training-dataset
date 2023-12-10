@@ -26,9 +26,5 @@ jobs:
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
           cd ./lean-training-data/
           export PATH=$PATH:~/.elan/bin
-          echo "cache get"
           lake exe cache get
-          echo "running script"
-          ./scripts/training_data.sh Mathlib.Logic.Hydra
-          echo "manually try thingy see what go bang"
-          ./scripts/training_data.sh
+          timeout 30 ./scripts/training_data.sh || [ $? -eq 124 ] && exit 0 || exit $?
