@@ -26,28 +26,14 @@ jobs:
           cd ./lean-training-data/
           export PATH=$PATH:~/.elan/bin
           lake exe cache get
-          timeout 60 ./scripts/training_data.sh || true
-          echo "uploading to hub"
+          ./scripts/training_data.sh
           cd ..
-          echo "cloning"
           git clone https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test training_data_repo
-          echo "Current directory: $(pwd)"
-          echo "Directory contents: $(ls)"
-          echo "moving"
           mv ./lean-training-data/out/training_data/ ./training_data_repo/data/
-          echo "Current directory: $(pwd)"
-          echo "Directory contents: $(ls)"
-          echo "cd"
           cd ./training_data_repo
-          echo "Current directory: $(pwd)"
-          echo "Directory contents: $(ls)"
           git config user.name "Github Actions"
           git config user.email "GithubActions@example.com"
-          echo "add"
           git add --all
-          echo "commit"
           git commit -m "Automatic data update"
-          echo "push"
           git push https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test main
-          echo "done upload"
           
