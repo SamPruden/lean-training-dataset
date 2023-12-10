@@ -15,10 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      
+    steps:      
       # Runs a set of commands using the runners shell
       - name: Install and run lean-training-data
         env:
@@ -34,8 +31,16 @@ jobs:
           cd ..
           echo "cloning"
           git clone https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test training_data_repo
+          echo "Current directory: $(pwd)"
+          echo "Directory contents: $(ls)"
           echo "moving"
           mv ./lean-training-data/out/training_data/ ./training_data_repo/data/
+          echo "Current directory: $(pwd)"
+          echo "Directory contents: $(ls)"
+          echo "cd"
+          cd ./training_data_repo
+          echo "Current directory: $(pwd)"
+          echo "Directory contents: $(ls)"
           git config user.name "Github Actions"
           git config user.email "GithubActions@example.com"
           echo "add"
