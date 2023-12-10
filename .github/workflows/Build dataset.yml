@@ -21,6 +21,8 @@ jobs:
       
       # Runs a set of commands using the runners shell
       - name: Install and run lean-training-data
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           git clone https://github.com/semorrison/lean-training-data.git
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
@@ -28,3 +30,8 @@ jobs:
           export PATH=$PATH:~/.elan/bin
           lake exe cache get
           timeout 30 ./scripts/training_data.sh || [ $? -eq 124 ] && exit 0 || exit $?
+          cd ..
+          git clone https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test training_data_repo
+          mv ./lean-training-data/out/training_data ./training_data_repo/data
+          git push https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test main
+          
