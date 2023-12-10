@@ -33,5 +33,6 @@ jobs:
           cd ..
           git clone https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test training_data_repo
           mv ./lean-training-data/out/training_data ./training_data_repo/data
+          git commit -a -m "Automatic data update"
           git push https://SamPr:$HF_TOKEN@huggingface.co/datasets/SamPr/lean_training_data_test main
           
